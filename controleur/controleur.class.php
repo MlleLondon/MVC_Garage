@@ -27,6 +27,12 @@
         public function deleteClient($idclient){
             $this->unModele->deleteClient($idclient);
         }
+        public function selectWhereClient($idclient){
+           return $this->unModele->selectWhereClient($idclient);
+        }
+        public function updateClient($tab){
+            $this->unModele->updateClient($tab);
+         }
 
 
 
@@ -51,7 +57,12 @@
         public function deleteTechnicien($idtechnicien){
             $this->unModele->deleteTechnicien($idtechnicien);
         }
-
+        public function selectWhereTechnicien($idtechnicien){
+            return $this->unModele->selectWhereTechnicien($idtechnicien);
+        }
+        public function updateTechnicien($tab){
+            $this->unModele->updateTechnicien($tab);
+        }
 
 
 
@@ -76,6 +87,12 @@
         public function deleteVehicule($idvehicule){
             $this->unModele->deleteVehicule($idvehicule);
         }
+        public function selectWhereVehicule($idvehicule){
+            return $this->unModele->selectWhereVehicule($idvehicule);
+        }
+        public function updateVehicule($tab){
+            $this->unModele->updateVehicule($tab);
+        }
 
 
 
@@ -98,6 +115,12 @@
             //On supprime une Intervention
         public function deleteIntervention($idintervention){
             $this->unModele->deleteIntervention($idintervention);
+        }
+        public function selectWhereIntervention($idintervention){
+            return $this->unModele->selectWhereIntervention($idintervention);
+        }
+        public function updateIntervention($tab){
+            $this->unModele->updateIntervention($tab);
         }
     }
 ?>
