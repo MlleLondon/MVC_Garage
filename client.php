@@ -7,13 +7,21 @@
         switch($action){
             case 'sup':
                 $unControleur->deleteClient($idclient);
-            break;
+                break;
+            case 'edit':
+                $leClient=$unControleur->selectWhereClient($idclient);
+                break;
         }
     }
     require_once("vue/vue_insert_client.php");
     if(isset($_POST['Valider'])){
         $unControleur->insertClient($_POST);
     }
+    if(isset($_POST['Modifier'])){
+        $unControleur->updateClient($_POST);
+        header("Location: index.php?page=1");
+    }
+    
     $lesClients=$unControleur->selectAllClients();
     require_once("vue/vue_les_clients.php");
     

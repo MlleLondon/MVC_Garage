@@ -5,17 +5,17 @@
         <tr>
             <td>Matricule: </td>
             <td>
-                <input type="text" name="matricule" value="">
+                <input type="text" name="matricule" value="<?= ($leVehicule!=null)?$leVehicule['matricule']: '' ?>">
             </td>
         </tr>
         <tr>
             <td>Marque: </td>
-            <td><input type="text" name="marque" value="">
+            <td><input type="text" name="marque" value="<?= ($leVehicule!=null)?$leVehicule['marque']: '' ?>">
             </td>
         </tr>
         <tr>
             <td>Nombre KiloMetre: </td>
-            <td><input type="text" name="nbkm" value="">
+            <td><input type="text" name="nbkm" value="<?= ($leVehicule!=null)?$leVehicule['nbkm']: '' ?>">
             </td>
         </tr>
         <tr>
@@ -57,9 +57,20 @@
                 </select> 
             </td>
         </tr>
+        <?php
+            if($leVehicule!=null){
+                echo "<input type='hidden' name='idvehicule' value=".$leVehicule['idvehicule'].">";
+            }
+        ?>
         <tr>
             <td><input type="reset" name="Annuler"></td>
-            <td><input type="submit" name="Valider">
+            <td><input type="submit" <?php 
+                if($leVehicule!=null){
+                    echo 'name ="Modifier" value="Modifier"';
+                }
+                else{
+                    echo 'name="Valider" value="Valider"';
+                }?>>
             </td>
         </tr>
     </table>

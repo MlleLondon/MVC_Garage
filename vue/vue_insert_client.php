@@ -5,22 +5,22 @@
         <tr>
             <td>Nom: </td>
             <td>
-                <input type="text" name="nom" value="">
+                <input type="text" name="nom" value="<?= ($leClient!=null)?$leClient['nom']: '' ?>">
             </td>
         </tr>
         <tr>
             <td>Prénom: </td>
-            <td><input type="text" name="prenom" value="">
+            <td><input type="text" name="prenom" value="<?= ($leClient!=null)?$leClient['prenom']: '' ?>">
             </td>
         </tr>
         <tr>
             <td>Adresse: </td>
-            <td><input type="text" name="adresse" value="">
+            <td><input type="text" name="adresse" value="<?= ($leClient!=null)?$leClient['adresse']: '' ?>">
             </td>
         </tr>
         <tr>
             <td>Telephone: </td>
-            <td><input type="text" name="tel" value="">
+            <td><input type="text" name="tel" value="<?= ($leClient!=null)?$leClient['tel']: '' ?>">
             </td>
         </tr>
         <?php

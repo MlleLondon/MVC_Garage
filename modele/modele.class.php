@@ -48,16 +48,50 @@
         }
             //Supprimer un Client
         public function deleteClient($idclient){
-            $requete="delete from client where idclient =".$idclient.";";
-
+            $requete="delete from client where idclient =:idclient;";
+            $donnees=array(
+                "idclient"=>$idclient
+            );
+            if($this->pdo !=null){
+                $delete=$this->pdo->prepare($requete);
+                $delete->execute($donnees);
+            }
+        }
+            //Sélectionner un Client pour modification
+        public function selectWhereClient($idclient){
+            $requete="select * from client where idclient=".$idclient.";";
             if($this->pdo !=null){
                 $select=$this->pdo->prepare($requete);
                 $select->execute();
+                //Extraction du Client
+                return $select->fetch();
+            }
+            else{
+                return null;
+            }
+        }
+            //Mettre à jour le Client
+        public function updateClient($tab){
+            $requete="update client set nom=:nom, prenom=:prenom, adresse=:adresse, tel=:tel where idclient=:idclient;";
+            $donnees=array(
+                ":idclient"=>$tab['idclient'],
+                ":nom"=>$tab['nom'],
+                ":prenom"=>$tab['prenom'],
+                ":adresse"=>$tab['adresse'],
+                ":tel"=>$tab['tel']
+            );
+
+            if($this->pdo!=null){
+                //On prépare la requête
+                $insert=$this->pdo->prepare($requete);
+                $insert->execute($donnees);
+
             }
         }
 
 
         /*** Fonctions Technicien ***/
+            //Insérer un Technicien
         public function insertTechnicien($tab){
             $requete="insert into technicien values (null, :nom, :prenom,:qualification,:email, :mdp);";
             $donnees=array(
@@ -75,6 +109,7 @@
 
             }
         }
+            //Sélectionner les Techniciens de la bdd
         public function selectAllTechniciens(){
             $requete="select * from technicien;";
             if($this->pdo !=null){
@@ -89,17 +124,54 @@
         }
             //Supprimer un Technicien
         public function deleteTechnicien($idtechnicien){
-            $requete="delete from technicien where idtechnicien =".$idtechnicien.";";
-
+            $requete="delete from technicien where idtechnicien =:idtechnicien;";
+            $donnees=array(
+                ":idtechnicien"=>$idtechnicien
+            );
+            if($this->pdo !=null){
+                $delete=$this->pdo->prepare($requete);
+                $delete->execute($donnees);
+            }
+        }
+            //Sélectionner un Technicien pour modification
+        public function selectWhereTechnicien($idtechnicien){
+            $requete="select * from technicien where idtechnicien=".$idtechnicien.";";
             if($this->pdo !=null){
                 $select=$this->pdo->prepare($requete);
                 $select->execute();
+                //Extraction du Technicien
+                return $select->fetch();
+            }
+            else{
+                return null;
+            }
+        }
+            //Mettre à jour le Technicien
+        public function updateTechnicien($tab){
+            $requete="update technicien set nom=:nom, prenom=:prenom, qualification=:qualification, email=:email, mdp=:mdp where idtechnicien=:idtechnicien;";
+            $donnees=array(
+                ":idtechnicien"=>$tab['idtechnicien'],
+                ":nom"=>$tab['nom'],
+                ":prenom"=>$tab['prenom'],
+                ":qualification"=>$tab['qualification'],
+                ":email"=>$tab['email'],
+                ":mdp"=>$tab['mdp']
+            );
+
+            if($this->pdo!=null){
+                //On prépare la requête
+                $insert=$this->pdo->prepare($requete);
+                $insert->execute($donnees);
+
             }
         }
 
 
 
+
+
         /*** Fonctions Véhicule ***/
+            //Insérer un Vehicule
         public function insertVehicule($tab){
             $requete="insert into vehicule values (null, :matricule, :marque,:nbkm,:energie, :idclient);";
             $donnees=array(
@@ -117,6 +189,7 @@
 
             }
         }
+            //Selectionner les Vehicules de la bdd
         public function selectAllVehicules(){
             $requete="select * from vehicule;";
             if($this->pdo !=null){
@@ -129,18 +202,56 @@
                 return null;
             }
         }
-            //Supprimer un Client
+            //Supprimer un Vehicule
         public function deleteVehicule($idvehicule){
-            $requete="delete from vehicule where idvehicule =".$idvehicule.";";
-
+            $requete="delete from vehicule where idvehicule =:idvehicule;";
+            $donnees=array(
+                ":idvehicule"=>$idvehicule
+            );
+            if($this->pdo !=null){
+                $delete=$this->pdo->prepare($requete);
+                $delete->execute($donnees);
+            }
+        }
+            //Sélectionner un Vehicule pour modification
+        public function selectWhereVehicule($idvehicule){
+            $requete="select * from vehicule where idvehicule=".$idvehicule.";";
             if($this->pdo !=null){
                 $select=$this->pdo->prepare($requete);
                 $select->execute();
+                //Extraction du Vehicule
+                return $select->fetch();
+            }
+            else{
+                return null;
+            }
+        }
+            //Mettre à jour le Vehicule
+        public function updateVehicule($tab){
+            $requete="update vehicule set matricule=:matricule, marque=:marque, nbkm=:nbkm, energie=:energie, idclient=:idclient where idvehicule=:idvehicule;";
+            $donnees=array(
+                ":idvehicule"=>$tab['idvehicule'],
+                ":matricule"=>$tab['matricule'],
+                ":marque"=>$tab['marque'],
+                ":nbkm"=>$tab['nbkm'],
+                ":energie"=>$tab['energie'],
+                ":idclient"=>$tab['idclient']
+            );
+
+            if($this->pdo!=null){
+                //On prépare la requête
+                $insert=$this->pdo->prepare($requete);
+                $insert->execute($donnees);
+
             }
         }
 
 
 
+
+
+        /*** Fonctions Intervention ***/
+            //Insérer une Intervention
         public function insertIntervention($tab){
             $requete="insert into intervention values (null, :description, :dateinter,:prix,:idtechnicien, :idvehicule);";
             $donnees=array(
@@ -158,6 +269,7 @@
 
             }
         }
+            //Sélectionner les Intervention de la bdd
         public function selectAllInterventions(){
             $requete="select * from intervention;";
             if($this->pdo !=null){
@@ -170,13 +282,47 @@
                 return null;
             }
         }
-            //Supprimer un Client
+            //Supprimer une Intervention
         public function deleteIntervention($idintervention){
-            $requete="delete from intervention where idintervention =".$idintervention.";";
-
+            $requete="delete from intervention where idintervention =:idintervention;";
+            $donnees=array(
+                ":idintervention"=>$idintervention
+            );
+            if($this->pdo !=null){
+                $delete=$this->pdo->prepare($requete);
+                $delete->execute($donnees);
+            }
+        }
+            //Sélectionner une Intervention pour modification
+        public function selectWhereIntervention($idintervention){
+            $requete="select * from intervention where idintervention=".$idintervention.";";
             if($this->pdo !=null){
                 $select=$this->pdo->prepare($requete);
                 $select->execute();
+                //Extraction du Intervention
+                return $select->fetch();
+            }
+            else{
+                return null;
+            }
+        }
+            //Mettre à jour l'Intervention
+        public function updateIntervention($tab){
+            $requete="update intervention set description=:description, dateinter=:dateinter, prix=:prix, idtechnicien=:idtechnicien, idvehicule=:idvehicule where idintervention=:idintervention;";
+            $donnees=array(
+                ":idintervention"=>$tab['idintervention'],
+                ":description"=>$tab['description'],
+                ":dateinter"=>$tab['dateinter'],
+                ":prix"=>$tab['prix'],
+                ":idtechnicien"=>$tab['idtechnicien'],
+                ":idvehicule"=>$tab['idvehicule']
+            );
+
+            if($this->pdo!=null){
+                //On prépare la requête
+                $insert=$this->pdo->prepare($requete);
+                $insert->execute($donnees);
+
             }
         }
     }
